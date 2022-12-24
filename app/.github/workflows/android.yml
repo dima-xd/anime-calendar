@@ -1,0 +1,28 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build_apk:
+    name: Build release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Grant permission for gradle
+        run: chmod +x gradlew
+      - name: Build APK
+        run: ./gradlew assemble
+      - name: Upload APK
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: android-calendar.apk
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
