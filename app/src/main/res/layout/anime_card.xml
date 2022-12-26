@@ -33,8 +33,8 @@
                 android:maxLines="3"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textSize="20sp"
-                app:autoSizeMaxTextSize="18dp"
-                app:autoSizeMinTextSize="16dp"
+                app:autoSizeMaxTextSize="19dp"
+                app:autoSizeMinTextSize="17dp"
                 app:autoSizeStepGranularity="2sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintEnd_toStartOf="@+id/anime_card_image"
@@ -47,20 +47,20 @@
                 android:layout_width="211dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anime_card_title" />
+                app:layout_constraintBottom_toTopOf="@+id/anime_card_rating"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/anime_card_rating"
                 android:layout_width="211dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anime_card_episodes" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/anime_card_image"
