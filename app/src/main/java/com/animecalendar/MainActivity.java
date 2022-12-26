@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadCalendar();
+
         super.onCreate(savedInstanceState);
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -90,8 +92,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
-
-        loadCalendar();
 
         calendar.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             chosenDayAnime.clear();
@@ -133,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
                                     jsonObject.getString("anime")
                             ));
                         }
+
+                        CalendarView calendar = (CalendarView) findViewById(R.id.calendar);
+                        Date maxDate = animeDays.get(animeDays.size() - 1).getNextEpisodeAt();
+                        calendar.setMaxDate(maxDate.getTime());
                     } catch (JSONException | ParseException e) {
                         e.printStackTrace();
                     }
