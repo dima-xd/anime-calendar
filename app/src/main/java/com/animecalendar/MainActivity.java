@@ -1,7 +1,10 @@
 package com.animecalendar;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -41,6 +44,8 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final Context context = this;
+
     private final List<AnimeDay> animeDays = new ArrayList<>();
     private final List<AnimeDay> chosenDayAnime = new ArrayList<>();
 
@@ -58,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         calendar.setMinDate(Calendar.getInstance().getTime().getTime());
 
         RecyclerView recyclerView = binding.recycler;
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -136,7 +141,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
+                PackageManager packageManager = context.getPackageManager();
+                Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+                ComponentName componentName = intent.getComponent();
+                Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+                context.startActivity(mainIntent);
+                Runtime.getRuntime().exit(0);
             }
         });
     }
